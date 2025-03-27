@@ -1,46 +1,64 @@
-package ru.dima.NaumenJava.service;
+package ru.dima.naumenjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.dima.NaumenJava.Task.Task;
-import ru.dima.NaumenJava.dao.TaskRepository;
+import ru.dima.naumenjava.entity.Task;
+import ru.dima.naumenjava.repository.CommentRepository;
+import ru.dima.naumenjava.repository.CrudRepositoryTask;
+import ru.dima.naumenjava.repository.StatusRepository;
+import ru.dima.naumenjava.repository.UserRepository;
+import ru.dima.naumenjava.repository.CategoryRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class TaskServiceImpl implements TaskService {
-    private final TaskRepository taskRepository;
+public class TaskServiceImpl {
+    private final CrudRepositoryTask taskRepository;
+    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final StatusRepository statusRepository;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(CrudRepositoryTask taskRepository,
+                           CommentRepository commentRepository,
+                           UserRepository userRepository,
+                           CategoryRepository categoryRepository,
+                           StatusRepository statusRepository) {
         this.taskRepository = taskRepository;
+        this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
+        this.statusRepository = statusRepository;
     }
 
-    @Override
-    public void createTask(Long id, String status, String taskName, LocalDate deadlines) {
-        Task task = new Task(id, status, taskName, deadlines);
-        taskRepository.create(task);
+    public void createTask(Long priority, String description, String taskName, LocalDate deadlines) {
+        Task task = new Task(priority, description, taskName, deadlines);
+        taskRepository.save(task);
     }
 
-    @Override
-    public Task readById(Long id) {
-        return taskRepository.read(id);
+    public Optional<Task> readById(Long id) {
+        return taskRepository.findById(id);
     }
 
-    @Override
-    public void updateTask(Long id, String newStatus, String newTaskName, LocalDate newDeadlines) {
-        Task updateTask = new Task(id, newStatus, newTaskName, newDeadlines);
-        taskRepository.update(updateTask);
+    public void updateTask(Long id, Long priority, String newDescription, String newTaskName, LocalDate newDeadlines) {
+        Task updateTask = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+
+        updateTask.setPriority(priority);
+        updateTask.setDescription(newDescription);
+        updateTask.setTaskName(newTaskName);
+        updateTask.setDeadlines(newDeadlines);
+
+        taskRepository.save(updateTask);
     }
 
-    @Override
     public void deleteTask(Long id) {
-        taskRepository.delete(id);
+        taskRepository.deleteById(id);
     }
 
-    @Override
     public List<Task> readAllTasks() {
-        return taskRepository.readAll();
+        return (List<Task>) taskRepository.findAll();
     }
 }

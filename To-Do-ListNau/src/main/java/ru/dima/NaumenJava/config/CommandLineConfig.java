@@ -1,6 +1,5 @@
-package ru.dima.NaumenJava.config;
+package ru.dima.naumenjava.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +10,7 @@ import java.util.Scanner;
 
 @Configuration
 public class CommandLineConfig {
-    @Bean
+//    @Bean
     public CommandLineRunner commandScanner(CommandProcessor commandProcessor, ApplicationContext context) {
         return args ->
         {
