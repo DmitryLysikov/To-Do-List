@@ -1,19 +1,20 @@
-package ru.dima.NaumenJava.config;
+package ru.dima.naumenjava.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.dima.NaumenJava.Task.Task;
-import ru.dima.NaumenJava.service.TaskService;
+import ru.dima.naumenjava.entity.Task;
+import ru.dima.naumenjava.service.TaskServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CommandProcessor {
-    private final TaskService taskService;
+    private final TaskServiceImpl taskService;
 
     @Autowired
-    public CommandProcessor(TaskService taskService) {
+    public CommandProcessor(TaskServiceImpl taskService) {
         this.taskService = taskService;
     }
 
@@ -25,7 +26,7 @@ public class CommandProcessor {
                 System.out.println("Task created");
             }
             case "read" -> {
-                Task task = taskService.readById(Long.valueOf(cmd[1]));
+                Optional<Task> task = taskService.readById(Long.valueOf(cmd[1]));
                 System.out.println(task);
             }
             case "readall" -> {
@@ -37,7 +38,8 @@ public class CommandProcessor {
                 }
             }
             case "update" -> {
-                taskService.updateTask(Long.valueOf(cmd[1]), cmd[2], cmd[3], LocalDate.parse(cmd[4]));
+                taskService.updateTask(Long.valueOf(cmd[0]), Long.valueOf(cmd[1]), cmd[2], cmd[3],
+                        LocalDate.parse(cmd[4]));
                 System.out.println("Task updated");
             }
             case "delete" -> {
