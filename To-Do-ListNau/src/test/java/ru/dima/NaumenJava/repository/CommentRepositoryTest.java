@@ -25,7 +25,7 @@ public class CommentRepositoryTest {
     private CommentRepository commentRepository;
 
     @Autowired
-    private CrudRepositoryTask taskRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
     private CrudRepository categoryRepository;

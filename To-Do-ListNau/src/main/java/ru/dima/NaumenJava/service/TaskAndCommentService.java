@@ -11,13 +11,18 @@ import java.util.List;
 
 @Service
 public class TaskAndCommentService {
-    private final CrudRepositoryTask taskRepository;
+    private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final StatusRepository statusRepository;
 
-    public TaskAndCommentService(CrudRepositoryTask taskRepository, CommentRepository commentRepository, UserRepository userRepository, CategoryRepository categoryRepository, StatusRepository statusRepository) {
+    public TaskAndCommentService(TaskRepository taskRepository,
+                                 CommentRepository commentRepository,
+                                 UserRepository userRepository,
+                                 CategoryRepository categoryRepository,
+                                 StatusRepository statusRepository)
+    {
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
@@ -26,8 +31,15 @@ public class TaskAndCommentService {
     }
 
     @Transactional
-    public Task createTaskWithComments(Long userId, Long categoryId, Long statusId, String taskName,
-                                       String description, Long priority, LocalDate deadline, List<String> commentTexts) {
+    public Task createTaskWithComments(Long userId,
+                                       Long categoryId,
+                                       Long statusId,
+                                       String taskName,
+                                       String description,
+                                       Long priority,
+                                       LocalDate deadline,
+                                       List<String> commentTexts)
+    {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Category category = categoryRepository.findById(categoryId)

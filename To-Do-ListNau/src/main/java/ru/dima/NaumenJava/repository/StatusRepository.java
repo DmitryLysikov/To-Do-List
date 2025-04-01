@@ -1,9 +1,10 @@
 package ru.dima.naumenjava.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import ru.dima.naumenjava.entity.Status;
 
-@Repository
+
+@RepositoryRestResource
 public interface StatusRepository extends CrudRepository<Status, Long> {
 }

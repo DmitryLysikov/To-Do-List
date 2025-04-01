@@ -26,7 +26,7 @@ class TaskAndCommentServiceTest {
     private TaskAndCommentService taskAndCommentService;
 
     @Autowired
-    private CrudRepositoryTask taskRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
     private CommentRepository commentRepository;

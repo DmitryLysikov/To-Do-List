@@ -20,10 +20,10 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @DataJpaTest
 @Transactional
 @AutoConfigureTestDatabase(replace = NONE)
-class CrudRepositoryTaskTest {
+class TaskRepositoryTest {
 
     @Autowired
-    private CrudRepositoryTask crudRepositoryTask;
+    private TaskRepository taskRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -49,12 +49,12 @@ class CrudRepositoryTaskTest {
         task.setCategory(category);
         task.setStatus(status);
         task.setUser(user);
-        crudRepositoryTask.save(task);
+        taskRepository.save(task);
     }
 
     @Test
     void testFindAllByOrderByPriorityAsc() {
-        List<Task> tasks = crudRepositoryTask.findAllByOrderByPriorityAsc();
+        List<Task> tasks = taskRepository.findAllByOrderByPriorityAsc();
 
         assertNotNull(tasks);
         assertEquals(1, tasks.size());
@@ -63,7 +63,7 @@ class CrudRepositoryTaskTest {
 
     @Test
     void testFindByUserId() {
-        List<Task> tasks = crudRepositoryTask.findByUserId(user.getId());
+        List<Task> tasks = taskRepository.findByUserId(user.getId());
 
         assertNotNull(tasks);
         assertEquals(1, tasks.size());
@@ -78,7 +78,7 @@ class CrudRepositoryTaskTest {
         anotherUser.setPassword("1234");
         userRepository.save(anotherUser);
 
-        List<Task> tasks = crudRepositoryTask.findByUserId(anotherUser.getId());
+        List<Task> tasks = taskRepository.findByUserId(anotherUser.getId());
 
         assertNotNull(tasks);
         assertTrue(tasks.isEmpty());
