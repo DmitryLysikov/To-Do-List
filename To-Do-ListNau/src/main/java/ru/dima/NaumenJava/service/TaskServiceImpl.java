@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dima.naumenjava.entity.Task;
 import ru.dima.naumenjava.repository.CommentRepository;
-import ru.dima.naumenjava.repository.CrudRepositoryTask;
+import ru.dima.naumenjava.repository.TaskRepository;
 import ru.dima.naumenjava.repository.StatusRepository;
 import ru.dima.naumenjava.repository.UserRepository;
 import ru.dima.naumenjava.repository.CategoryRepository;
@@ -15,14 +15,14 @@ import java.util.Optional;
 
 @Service
 public class TaskServiceImpl {
-    private final CrudRepositoryTask taskRepository;
+    private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final StatusRepository statusRepository;
 
     @Autowired
-    public TaskServiceImpl(CrudRepositoryTask taskRepository,
+    public TaskServiceImpl(TaskRepository taskRepository,
                            CommentRepository commentRepository,
                            UserRepository userRepository,
                            CategoryRepository categoryRepository,
@@ -59,6 +59,6 @@ public class TaskServiceImpl {
     }
 
     public List<Task> readAllTasks() {
-        return (List<Task>) taskRepository.findAll();
+        return taskRepository.findAll();
     }
 }

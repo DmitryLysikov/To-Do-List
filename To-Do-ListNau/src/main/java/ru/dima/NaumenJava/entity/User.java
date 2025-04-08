@@ -34,14 +34,12 @@ public class User {
     private List<Comment> comments;
 
     public User() {
-        this.createdAt = LocalDate.now().plusDays(9);
     }
 
     public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.createdAt = LocalDate.now().plusDays(9);
     }
 
     public Long getId() {
@@ -94,6 +92,10 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void setCreatedAt() {
+        this.createdAt = LocalDate.now();
     }
 
     @Override
