@@ -2,12 +2,12 @@ package ru.dima.naumenjava.criteria;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import ru.dima.naumenjava.entity.Task;
 
 import java.util.List;
 
-@Service
+@Repository
 public class TaskCriteriaRepositoryImpl implements TaskCriteriaRepository {
 
     private final EntityManager entityManager;
