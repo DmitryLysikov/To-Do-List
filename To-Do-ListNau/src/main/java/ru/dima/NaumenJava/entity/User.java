@@ -24,6 +24,10 @@ public class User {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDate createdAt;
 
@@ -96,6 +100,14 @@ public class User {
 
     public void setCreatedAt() {
         this.createdAt = LocalDate.now();
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
