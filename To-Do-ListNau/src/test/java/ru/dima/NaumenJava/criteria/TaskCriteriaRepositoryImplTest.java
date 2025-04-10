@@ -14,7 +14,6 @@ import ru.dima.naumenjava.entity.Status;
 import ru.dima.naumenjava.entity.Task;
 import ru.dima.naumenjava.entity.User;
 import ru.dima.naumenjava.repository.CategoryRepository;
-import ru.dima.naumenjava.repository.CrudRepositoryTask;
 import ru.dima.naumenjava.repository.StatusRepository;
 import ru.dima.naumenjava.repository.UserRepository;
 

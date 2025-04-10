@@ -1,11 +1,11 @@
 package ru.dima.naumenjava.criteria;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import ru.dima.naumenjava.entity.Task;
 
 import java.util.List;
 
-@Repository
+@RepositoryRestResource
 public interface TaskCriteriaRepository {
     List<Task> findByStatusAndPriority(String status, Long priority);
     List<Task> findTasksByUserId(Long userId);

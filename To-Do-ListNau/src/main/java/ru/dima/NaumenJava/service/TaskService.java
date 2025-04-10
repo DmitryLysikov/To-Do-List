@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskServiceImpl {
+public class TaskService {
     private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
@@ -22,11 +22,11 @@ public class TaskServiceImpl {
     private final StatusRepository statusRepository;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository,
-                           CommentRepository commentRepository,
-                           UserRepository userRepository,
-                           CategoryRepository categoryRepository,
-                           StatusRepository statusRepository) {
+    public TaskService(TaskRepository taskRepository,
+                       CommentRepository commentRepository,
+                       UserRepository userRepository,
+                       CategoryRepository categoryRepository,
+                       StatusRepository statusRepository) {
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;

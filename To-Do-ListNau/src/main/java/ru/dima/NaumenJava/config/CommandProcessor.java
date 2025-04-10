@@ -3,7 +3,7 @@ package ru.dima.naumenjava.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.dima.naumenjava.entity.Task;
-import ru.dima.naumenjava.service.TaskServiceImpl;
+import ru.dima.naumenjava.service.TaskService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Component
 public class CommandProcessor {
-    private final TaskServiceImpl taskService;
+    private final TaskService taskService;
 
     @Autowired
-    public CommandProcessor(TaskServiceImpl taskService) {
+    public CommandProcessor(TaskService taskService) {
         this.taskService = taskService;
     }
 
