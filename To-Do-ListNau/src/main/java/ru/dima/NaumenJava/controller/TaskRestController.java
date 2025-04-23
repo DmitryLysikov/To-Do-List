@@ -1,5 +1,6 @@
 package ru.dima.naumenjava.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dima.naumenjava.criteria.TaskCriteriaRepositoryImpl;
 import ru.dima.naumenjava.entity.Task;
@@ -19,19 +20,22 @@ public class TaskRestController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/rest/tasks")
-    public List<Task> findByStatusAndPriority(@RequestParam(name = "status", required = false) String status,
+    @GetMapping("")
+    public ResponseEntity<List<Task>> findByStatusAndPriority(@RequestParam(name = "status", required = false) String status,
                                               @RequestParam(name = "priority", required = false) Long priority)
     {
-        return taskCriteriaRepository.findByStatusAndPriority(status, priority);
+        List<Task> tasks = taskCriteriaRepository.findByStatusAndPriority(status, priority);
+        return ResponseEntity.ok().body(tasks);
     }
 
     @GetMapping("/find-tasks-by-userid/{userId}")
-    public List<Task> findTasksByUserId(@PathVariable Long userId) {
-        if(!userRepository.existsById(userId)){
-            throw new UserNotFoundException("User not found");
-        }else {
-            return taskCriteriaRepository.findTasksByUserId(userId);
+    public ResponseEntity<List<Task>> findTasksByUserId(@PathVariable Long userId) {
+        if (!userRepository.existsById(userId)) {
+            return ResponseEntity.notFound().build(); // 404
         }
+
+        List<Task> tasks = taskCriteriaRepository.findTasksByUserId(userId);
+
+        return ResponseEntity.ok(tasks); // 200
     }
 }
